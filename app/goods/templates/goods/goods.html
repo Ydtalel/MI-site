@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}  {{ goods.name }} | {{ block.super }} {% endblock title %}
+
+{% block navbar %}
+{% include 'inc/_navbar.html' %}
+{% endblock navbar %}
+
+{% block content %}
+
+<div class="card text-bg-dark mb-3">
+    <div class="card-body">
+        {% if goods.photo %}
+        <img src="{{ goods.photo.url }}" width="350" class="img-fluid rounded-start" alt="{{ goods.name }}" >
+        {% endif %}
+        <h5 class="card-title">{{ goods.name }}</h5>
+        <p class="card-text">{{ goods.content|linebreaks }}</p>
+
+        <a href="{% url 'update-goods' goods.pk %}" class="btn btn-outline-warning">Редактировать...</a>
+
+
+    </div>
+</div>
+
+{% endblock content %}

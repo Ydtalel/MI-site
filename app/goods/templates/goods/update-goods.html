@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}  Редактировать товар | {{ block.super }} {% endblock title %}
+
+
+{% block content %}
+
+<h1>Редактировать товар</h1>
+<form action="{% url 'update-goods' good.pk %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <br>
+    <button type="submit" class="btn btn-outline-dark">Сохранить изменения</button>
+</form>
+
+{% endblock content %}

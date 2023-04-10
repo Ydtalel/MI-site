@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}  {{ title }} | {{ block.super }} {% endblock title %}
+
+{% block navbar %}
+
+{% endblock navbar %}
+
+{% block content %}
+{{ mixin_property }}
+    {% for g in goods %}
+        <div class="card text-bg-light mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if g.photo %}
+                        <img src="{{ g.photo.url }}" class="img-fluid rounded-start" alt="{{ g.name }}">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ g.name }}</h5>
+                        <p class="card-text">{{ g.content|truncatewords:50|linebreaks }}</p>
+                        <p> <a href="{{ g.get_absolute_url }}" class="btn btn-outline-dark">Подробнее...</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock content %}

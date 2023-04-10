@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}  Поиск {% endblock title %}
+
+{% block navbar %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+    {% for g in goods %}
+        <div class="card text-bg-light mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if g.photo %}
+                        <img src="{{ g.photo.url }}" class="img-fluid rounded-start" alt="{{ g.name }}">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ g.name }}</h5>
+                        <p class="card-text">{{ g.content|truncatewords:50|linebreaks }}</p>
+                        <p> <a href="{{ g.get_absolute_url }}" class="btn btn-outline-dark">Подробнее...</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+    <p>Поиск не дал результатов</p>
+    {% endfor %}
+
+{% endblock content %}
+
+
+
+
+{% block pagination %}
+
+{% if page_obj.has_other_pages %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination" >
+
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?{{ search }}page=1">Начало</a></li>
+            <li class="page-item">
+                <a class="page-link" href="?{{ search }}page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true" >&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+            {% for p in page_obj.paginator.page_range %}
+            {% if page_obj.number == p %}
+                <li class="page-item active" aria-current="page" >
+                    <a class="page-link" href="#">{{ p }}</a>
+                </li>
+            {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3  %}
+                <li class="page-item"><a class="page-link" href="?{{ search }}page={{ p }}">{{ p }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?{{ search }}page={{ page_obj.paginator.num_pages }}">Конец</a></li>
+             <li class="page-item">
+                <a class="page-link" href="?{{ search }}page={{ page_obj.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+{% endif %}
+
+{% endblock pagination %}

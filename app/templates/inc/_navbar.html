@@ -1,0 +1,13 @@
+{% comment %}
+
+{% load goods_tags %}
+
+{% get_categories as cat %}
+{% for c in cat %}
+  <li class="list-group-item list-group-item-secondary">
+      <a href="{{ c.get_absolute_url }}" class="list-group-item list-group-item-action">{{ c.name }}</a>
+  </li>
+{% endfor %}
+
+{% show_categories %}
+{% endcomment %}

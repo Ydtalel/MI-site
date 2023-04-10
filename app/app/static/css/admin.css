@@ -1,0 +1,13 @@
+#header, .module h2, .module caption, .inline-group h2{
+    background-color: #009688;
+}
+#branding h1 a:link, #branding h1 a:visited, #user-tools {
+    color: #37474f;
+}
+
+div.breadcrumbs {
+    background-color: #80cbc4;
+}
+div.breadcrumbs{
+    background: #004d40;
+}

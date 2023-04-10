@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}  Добавить товар | {{ block.super }} {% endblock title %}
+
+{% block navbar %}
+{% include 'inc/_navbar.html' %}
+{% endblock navbar %}
+
+{% block content %}
+
+<h1>Добавить товар</h1>
+<form action="{% url 'add-goods' %}" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+
+
+    {% comment %}
+    {{ form.non_field.errors }}
+    <div class="mb-3">
+        <label for="{{ for.name.id_for_label }}" class="form-label">Наименование товара</label>
+        {{ form.name }}
+        <div class="invalid-feedback">
+            {{ form.name.errors }}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ for.content.id_for_label }}" class="form-label">Наименование товара</label>
+        {{ form.content }}
+        <div class="invalid-feedback">
+            {{ form.content.errors }}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ for.price.id_for_label }}" class="form-label">Цена товара</label>
+        {{ form.price }}
+        <div class="invalid-feedback">
+            {{ form.price.errors }}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ for.category.id_for_label }}" class="form-label">Категория</label>
+        {{ form.category }}
+        <div class="invalid-feedback">
+            {{ form.category.errors }}
+        </div>
+    </div>
+    {% endcomment %}
+
+    {% comment %}
+    {% for f in form %}
+    <div class="form-group">
+        {{ f.label_tag }}
+        {{ f }}
+        {{ f.errors }}
+    </div>
+    {% endfor %}
+    {% endcomment %}
+
+
+    <br>
+    <button type="submit" class="btn btn-outline-dark">Добавить товар</button>
+</form>
+
+{% endblock content %}
